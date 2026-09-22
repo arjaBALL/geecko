@@ -1,4 +1,4 @@
-# ci3-generator
+# GEECKO
 
 <img src="assets/mascot.svg" alt="ci3-generator mascot: a pixel-art gecko" width="180" />
 
