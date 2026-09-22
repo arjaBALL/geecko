@@ -1,0 +1,59 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class <%= controllerClass %> extends CI_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->load->model('<%= modelClass %>');
+<% if (withService) { -%>
+        $this->load->library('<%= serviceClass %>');
+<% } -%>
+    }
+
+    public function index()
+    {
+        $data['<%= itemsVar %>'] = $this-><%= modelProperty %>->all();
+
+        $this->load->view('<%= viewFolder %>/index', $data);
+    }
+
+    public function view($id)
+    {
+        $data['<%= itemVar %>'] = $this-><%= modelProperty %>->find($id);
+
+        if (!$data['<%= itemVar %>']) {
+            show_404();
+        }
+
+        $this->load->view('<%= viewFolder %>/view', $data);
+    }
+<% if (withService) { -%>
+
+    public function create()
+    {
+        if ($this->input->method() === 'post') {
+            $this-><%= servicePropertyName %>->create($this->input->post());
+            redirect('<%= routeSlug %>');
+            return;
+        }
+
+        $this->load->view('<%= viewFolder %>/create');
+    }
+
+    public function update($id)
+    {
+        $this-><%= servicePropertyName %>->update($id, $this->input->post());
+        redirect('<%= routeSlug %>');
+    }
+
+    public function delete($id)
+    {
+        $this-><%= servicePropertyName %>->delete($id);
+        redirect('<%= routeSlug %>');
+    }
+<% } -%>
+}

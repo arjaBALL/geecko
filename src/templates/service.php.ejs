@@ -1,0 +1,58 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * <%= serviceClass %>
+ *
+ * Business logic for "<%= subject %>" lives here, not in the controller.
+ * The controller should only translate HTTP input into calls on this
+ * class and turn the result back into a response.
+ *
+ * This is a plain CI3 library — load it the normal CI3 way:
+ *
+ *     $this->load->library('<%= serviceClass %>');
+ *     $this-><%= serviceClass.toLowerCase() %>->create($data);
+ *
+ * (CI3 attaches a loaded library under a property named after the
+ * lowercased class/file name, so it's <%= serviceClass.toLowerCase() %>,
+ * not <%= serviceClass %>.)
+ */
+class <%= serviceClass %>
+{
+    /** @var CI_Controller */
+    protected $CI;
+
+    public function __construct()
+    {
+        $this->CI =& get_instance();
+        $this->CI->load->model('<%= modelClass %>');
+    }
+
+    public function all()
+    {
+        return $this->CI-><%= modelProperty %>->all();
+    }
+
+    public function find($id)
+    {
+        return $this->CI-><%= modelProperty %>->find($id);
+    }
+
+    public function create(array $data)
+    {
+        // TODO: validate / transform $data before persisting.
+        return $this->CI-><%= modelProperty %>->create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        // TODO: validate / transform $data before persisting.
+        return $this->CI-><%= modelProperty %>->update($id, $data);
+    }
+
+    public function delete($id)
+    {
+        return $this->CI-><%= modelProperty %>->delete($id);
+    }
+}
